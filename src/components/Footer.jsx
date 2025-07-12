@@ -56,12 +56,12 @@ const Footer = () => {
           {/* Social Links */}
                     <div>
             <h4 className="text-sm font-semibold mb-4 uppercase text-gray-800">Follow Us</h4>
-            <div className="flex flex-col space-y-2 text-sm text-gray-600 sm:flex-row sm:space-y-0 sm:space-x-6">
+            <div className="flex flex-col space-y-2 text-sm text-gray-600 sm:flex sm:space-y-0 sm:space-x-6">
               <a
                 href="https://www.facebook.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center space-x-2 hover:text-blue-600 transition"
+                className="flex pb-2 items-center space-x-2 hover:text-blue-600 transition"
               >
                 <FaFacebookF className="text-blue-600" />
                 <span>Facebook</span>
@@ -70,7 +70,7 @@ const Footer = () => {
                 href="https://www.twitter.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center space-x-2 hover:text-blue-400 transition"
+                className="flex items-center pb-2 space-x-2 hover:text-blue-400 transition"
               >
                 <FaTwitter className="text-blue-400" />
                 <span>Twitter</span>
@@ -79,7 +79,7 @@ const Footer = () => {
                 href="https://www.instagram.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center space-x-2 hover:text-pink-500 transition"
+                className="flex items-center pb-2 space-x-2 hover:text-pink-500 transition"
               >
                 <FaInstagram className="text-pink-500" />
                 <span>Instagram</span>
