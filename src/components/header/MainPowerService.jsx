@@ -1,25 +1,47 @@
 import React from "react";
+import Select from "react-select";
+
+const options = [
+  { value: "", label: "Select a mainpower service" },
+  { value: "Hairperson", label: "Hair person" },
+];
+
+const customStyles = {
+  control: (base) => ({
+    ...base,
+    borderRadius: "0.375rem",
+    borderColor: "#d1d5db",
+    padding: "0.1rem 0.5rem",
+    fontSize: "0.875rem",
+    boxShadow: "none",
+    "&:hover": {
+      borderColor: "#facc15",
+    },
+  }),
+  option: (base, state) => ({
+    ...base,
+    backgroundColor: state.isFocused ? "#fde047" : "#ffffff", // yellow-300
+    color: "#000000",
+    fontSize: "0.875rem",
+  }),
+};
 
 function MainPowerService({ onChange }) {
-  const handleSelect = (event) => {
-    const value = event.target.value;
-    onChange?.("mainPowerService", value);
+  const handleChange = (selectedOption) => {
+    onChange?.("mainPowerService", selectedOption.value);
   };
 
   return (
-    <div className="w-52">
-      <label htmlFor="mainPowerService" className="block text-sm font-medium text-gray-700 mb-1">
+    <div className="w-48 sm:w-52">
+      <label className="block text-sm font-medium text-gray-700 mb-1 pl-1">
         Main Power Service
       </label>
-      <select
-        id="mainPowerService"
-        name="mainPowerService"
-        onChange={handleSelect}
-        className="w-full border rounded px-3 py-2 text-sm"
-      >
-        <option value="">Select a service</option>
-        <option value="Hairperson">Hair person</option>
-      </select>
+      <Select
+        options={options}
+        onChange={handleChange}
+        styles={customStyles}
+        defaultValue={options[0]}
+      />
     </div>
   );
 }

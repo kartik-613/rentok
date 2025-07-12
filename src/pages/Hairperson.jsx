@@ -20,7 +20,7 @@ function Hairperson() {
 
     alert("Hairperson service submitted!");
 
-    // Optional: Reset form
+    // Reset form
     setName("");
     setContact("");
     setDuration("");
@@ -29,14 +29,20 @@ function Hairperson() {
   };
 
   return (
-    <div className="max-w-xl mx-auto px-4 py-10">
-      <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">Hairperson Service Booking</h2>
+    <div className="max-w-2xl mx-auto px-4 py-12">
+      <h2 className="text-3xl font-extrabold text-center mb-6 text-yellow-600 tracking-wide">
+        Book Your Hairperson Service
+      </h2>
 
-      <form onSubmit={handleSubmit} className="bg-white shadow-md rounded-lg p-6 space-y-5">
-
+      <form
+        onSubmit={handleSubmit}
+        className="bg-gradient-to-br from-yellow-100 via-orange-50 to-white shadow-lg rounded-xl p-8 space-y-6"
+      >
         {/* Name */}
         <div>
-          <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">Name</label>
+          <label htmlFor="name" className="block text-sm font-semibold text-gray-800 mb-1">
+            Name
+          </label>
           <input
             type="text"
             id="name"
@@ -44,13 +50,15 @@ function Hairperson() {
             required
             placeholder="Enter your name"
             onChange={(e) => setName(e.target.value)}
-            className="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full border border-yellow-300 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-yellow-400"
           />
         </div>
 
         {/* Contact */}
         <div>
-          <label htmlFor="contact" className="block text-sm font-medium text-gray-700 mb-1">Contact Number</label>
+          <label htmlFor="contact" className="block text-sm font-semibold text-gray-800 mb-1">
+            Contact Number
+          </label>
           <input
             type="tel"
             id="contact"
@@ -59,19 +67,21 @@ function Hairperson() {
             pattern="[0-9]{10}"
             placeholder="Enter contact number"
             onChange={(e) => setContact(e.target.value)}
-            className="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full border border-yellow-300 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-yellow-400"
           />
         </div>
 
         {/* Duration */}
         <div>
-          <label htmlFor="duration" className="block text-sm font-medium text-gray-700 mb-1">Select Duration</label>
+          <label htmlFor="duration" className="block text-sm font-semibold text-gray-800 mb-1">
+            Select Duration
+          </label>
           <select
             id="duration"
             value={duration}
             required
             onChange={(e) => setDuration(e.target.value)}
-            className="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full border border-yellow-300 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-yellow-400"
           >
             <option value="">Choose duration</option>
             <option value="1 hour">1 hour</option>
@@ -83,13 +93,15 @@ function Hairperson() {
 
         {/* Service Type */}
         <div>
-          <label htmlFor="serviceType" className="block text-sm font-medium text-gray-700 mb-1">Service Type</label>
+          <label htmlFor="serviceType" className="block text-sm font-semibold text-gray-800 mb-1">
+            Service Type
+          </label>
           <select
             id="serviceType"
             value={serviceType}
             required
             onChange={(e) => setServiceType(e.target.value)}
-            className="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full border border-yellow-300 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-yellow-400"
           >
             <option value="">Select a service</option>
             <option value="Haircut">Haircut</option>
@@ -101,7 +113,9 @@ function Hairperson() {
 
         {/* Description */}
         <div>
-          <label htmlFor="description" className="block text-sm font-medium text-gray-700 mb-1">Service Description</label>
+          <label htmlFor="description" className="block text-sm font-semibold text-gray-800 mb-1">
+            Service Description
+          </label>
           <textarea
             id="description"
             value={description}
@@ -109,7 +123,7 @@ function Hairperson() {
             onChange={(e) => setDescription(e.target.value)}
             rows="4"
             placeholder="Describe the service you want..."
-            className="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full border border-yellow-300 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-yellow-400"
           />
         </div>
 
@@ -117,9 +131,9 @@ function Hairperson() {
         <div className="text-center">
           <button
             type="submit"
-            className="bg-blue-600 text-white font-medium px-6 py-2 rounded hover:bg-blue-700 transition duration-200"
+            className="bg-black text-white font-semibold px-6 py-2 rounded-full hover:bg-gray-800 transition duration-200"
           >
-            Submit
+            Submit Request
           </button>
         </div>
       </form>
