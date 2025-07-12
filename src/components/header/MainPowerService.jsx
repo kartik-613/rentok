@@ -3,7 +3,7 @@ import Select from "react-select";
 
 const options = [
   { value: "", label: "Select a mainpower service" },
-  { value: "Hairperson", label: "Hair person" },
+  { value: "Hireperson", label: "Hire person" },
 ];
 
 const customStyles = {
