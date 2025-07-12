@@ -32,7 +32,7 @@ function MainPowerService({ onChange }) {
   };
 
   return (
-    <div className="w-48 sm:w-52">
+    <div className="w-full max-w-xs sm:w-48 md:w-52">
       <label className="block text-sm font-medium text-gray-700 mb-1 pl-1">
         Main Power Service
       </label>
