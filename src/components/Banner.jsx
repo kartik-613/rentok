@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import rentok from "../assets/rentok.png";
-import rentok2 from "../assets/rentok.png"; // Replace with actual different images
-import rentok3 from "../assets/rentok.png"; // Replace with actual different images
+import rentok2 from "../assets/rentok.png";
+import rentok3 from "../assets/rentok.png";
 import { FaFacebookF, FaInstagram, FaTwitter } from "react-icons/fa";
 
 const banners = [
@@ -39,6 +39,7 @@ const banners = [
 
 const RentokBanner = () => {
   const [index, setIndex] = useState(0);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -51,7 +52,7 @@ const RentokBanner = () => {
   const current = banners[index];
 
   return (
-    <div className="w-full">
+    <div className="w-full relative">
       <style>{`
         @keyframes slideInRight {
           from {
@@ -67,6 +68,34 @@ const RentokBanner = () => {
           animation: slideInRight 0.7s ease-in-out;
         }
       `}</style>
+
+      {/* Dropdown Menu */}
+      <div className="absolute top-4 right-6 z-50">
+        <div className="relative">
+          <button
+            onClick={() => setDropdownOpen(!dropdownOpen)}
+            className="bg-white text-black font-medium px-4 py-2 rounded shadow hover:bg-gray-100"
+          >
+            Menu
+          </button>
+          {dropdownOpen && (
+            <div className="absolute right-0 mt-2 bg-white rounded shadow-lg flex space-x-4 px-4 py-2 z-50">
+              <a href="#" className="text-sm text-gray-700 hover:text-black">
+                Electronics
+              </a>
+              <a href="#" className="text-sm text-gray-700 hover:text-black">
+                Furniture
+              </a>
+              <a href="#" className="text-sm text-gray-700 hover:text-black">
+                Bikes
+              </a>
+              <a href="#" className="text-sm text-gray-700 hover:text-black">
+                Deals
+              </a>
+            </div>
+          )}
+        </div>
+      </div>
 
       <section
         key={index}
