@@ -45,7 +45,7 @@ const cardData = [
 
 const CardSection = () => {
   return (
-    <section className="py-10 bg-white">
+    <section className="py-10 bg-white rounded-lg">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="text-2xl sm:text-3xl font-bold mb-8 text-center text-gray-800">
           Explore Categories

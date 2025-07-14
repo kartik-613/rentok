@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function Hairperson() {
+function Hireperson() {
   const [name, setName] = useState("");
   const [duration, setDuration] = useState("");
   const [serviceType, setServiceType] = useState("");
@@ -141,4 +141,4 @@ function Hairperson() {
   );
 }
 
-export default Hairperson;
+export default Hireperson;
