@@ -52,12 +52,12 @@ const RentokBanner = () => {
   const current = banners[index];
 
   return (
-    <div className="w-full relative">
+    <div className="w-full relative overflow-hidden py-2">
       <style>{`
         @keyframes slideInRight {
           from {
             opacity: 0;
-            transform: translateX(50%);
+            transform: translateX(60%);
           }
           to {
             opacity: 1;
@@ -65,12 +65,12 @@ const RentokBanner = () => {
           }
         }
         .animate-slide-in-right {
-          animation: slideInRight 0.7s ease-in-out;
+          animation: slideInRight 0.5s ease-in-out;
         }
       `}</style>
 
       {/* Dropdown Menu */}
-      <div className="absolute top-4 right-6 z-50">
+      <div className="absolute top-4 right-6 z-10">
         <div className="relative">
           <button
             onClick={() => setDropdownOpen(!dropdownOpen)}
@@ -79,7 +79,7 @@ const RentokBanner = () => {
             Menu
           </button>
           {dropdownOpen && (
-            <div className="absolute right-0 mt-2 bg-white rounded shadow-lg flex space-x-4 px-4 py-2 z-50">
+            <div className="absolut right-0 mt-2 bg-white rounded shadow-lg flex space-x-4 px-4 py-2 z-10">
               <a href="#" className="text-sm text-gray-700 hover:text-black">
                 Electronics
               </a>
@@ -99,7 +99,7 @@ const RentokBanner = () => {
 
       <section
         key={index}
-        className={`relative bg-gradient-to-r ${current.bg} rounded-lg overflow-hidden shadow-lg px-6 py-10 sm:px-10 md:px-12 lg:px-16 flex flex-col-reverse md:flex-row items-center justify-between gap-6 my-2 animate-slide-in-right`}
+        className={`relative bg-gradient-to-r ${current.bg} rounded-lg overflow-hidden  px-6 sm:px-10 md:px-12 lg:px-16 flex flex-col-reverse md:flex-row items-center justify-between gap-6 mb-1 animate-slide-in-right`}
       >
         {/* Left Text */}
         <div className="w-full md:w-1/2 text-center md:text-left space-y-5">
@@ -148,12 +148,12 @@ const RentokBanner = () => {
       </section>
 
       {/* Navigation Dots */}
-      <div className="flex justify-center mt-4 space-x-2">
+      <div className="flex justify-center space-x-2">
         {banners.map((_, i) => (
           <button
             key={i}
             onClick={() => handleDotClick(i)}
-            className={`w-3 h-3 rounded-full transition duration-300 ${
+            className={`w-1.5 h-1.5 rounded-full transition duration-300 ${
               i === index ? "bg-black scale-125" : "bg-gray-300 hover:bg-gray-500"
             }`}
           ></button>

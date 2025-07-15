@@ -1,58 +1,4 @@
-// import React from "react";
-// import Select from "react-select";
-
-// const options = [
-//   { value: "", label: "Select a rental service" },
-//   { value: "Hotel", label: "Hotel" },
-//   { value: "Rooms", label: "Rooms" },
-//   { value: "Hotel Table", label: "Hotel Table" },
-//   { value: "Vehicle", label: "Vehicle" },
-//   { value: "Bike", label: "Bike" },
-// ];
-
-// const customStyles = {
-//   control: (base) => ({
-//     ...base,
-//     borderRadius: "0.375rem",
-//     borderColor: "#d1d5db",
-//     padding: "0.0rem 0.0rem",
-//     fontSize: "0.875rem",
-//     boxShadow: "none",
-//     "&:hover": {
-//       borderColor: "#facc15",
-//     },
-//   }),
-//   option: (base, state) => ({
-//     ...base,
-//     backgroundColor: state.isFocused ? "#fde047" : "#ffffff",
-//     color: "#000000",
-//     fontSize: "0.875rem",
-//   }),
-// };
-
-// function RentalService({ onChange }) {
-//   const handleChange = (selectedOption) => {
-//     onChange?.("rentalService", selectedOption.value);
-//   };
-
-//   return (
-//     <div className="w-full max-w-xs sm:w-48 md:w-52">
-//       {/* <label className="block text-sm font-medium text-gray-700 mb-1 pl-1">
-//         Rental Service
-//       </label> */}
-//       <Select
-//         options={options}
-//         onChange={handleChange}
-//         styles={customStyles}
-//         defaultValue={options[0]}
-//       />
-//     </div>
-//   );
-// }
-
-// export default RentalService;
-
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 
 const options = [
   { value: "", label: "Select a rental service" },
@@ -64,32 +10,74 @@ const options = [
 ];
 
 function RentalService({ onChange }) {
-  const [selected, setSelected] = useState("");
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [selected, setSelected] = useState(options[0]);
+  const dropdownRef = useRef(null);
 
-  const handleChange = (e) => {
-    const value = e.target.value;
-    setSelected(value);
-    onChange?.("rentalService", value);
+  const handleSelect = (option) => {
+    setSelected(option);
+    setDropdownOpen(false);
+    onChange?.("rentalService", option.value);
   };
 
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   return (
-    <div className="w-full max-w-xs sm:w-48 md:w-60">
+    <div ref={dropdownRef} className="relative w-full max-w-xs sm:w-48 md:w-60">
       <label className="block text-sm font-medium text-gray-700 ml-1 mb-1">
         Rental Service
       </label>
-      <div className="relative">
-        <select
-          value={selected}
-          onChange={handleChange}
-          className="w-full border border-gray-300 rounded px-4 py-0.5 cursor-pointer text-gray-400 focus:outline-none shadow-sm"
+      <button
+        type="button"
+        onClick={() => setDropdownOpen((prev) => !prev)}
+        className="w-full flex justify-between items-center bg-white border border-gray-300 text-gray-500 text-sm px-4 py-1 rounded shadow-sm hover:bg-gray-100"
+      >
+        <span>{selected.label}</span>
+        <svg
+          className={`w-4 h-4 transition-transform ${dropdownOpen ? "rotate-180" : ""}`}
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
         >
-          {options.map((opt) => (
-            <option key={opt.value} value={opt.value}>
-              {opt.label}
-            </option>
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+            d="M19 9l-7 7-7-7"
+          />
+        </svg>
+      </button>
+
+      {dropdownOpen && (
+        <div className="absolute left-0 mt-1 w-full bg-white rounded shadow-lg z-50 border border-gray-200 max-h-60 overflow-auto">
+          {options.map((option) => (
+            <button
+              key={option.value}
+              type="button"
+              onClick={() => handleSelect(option)}
+              className={`text-left w-full text-sm px-4 py-2 hover:bg-yellow-100 ${
+                selected.value === option.value
+                  ? "text-black font-semibold bg-gray-50"
+                  : "text-gray-700"
+              }`}
+            >
+              {option.label}
+            </button>
           ))}
-        </select>
-      </div>
+        </div>
+      )}
     </div>
   );
 }

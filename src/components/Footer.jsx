@@ -6,7 +6,7 @@ const Footer = () => {
     <footer className="bg-gray-100 text-gray-700 pt-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Top Section */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 pb-10 border-b border-gray-300">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 pb-10 pt-2 border-y border-gray-300">
 
           {/* Popular Locations */}
           <div>
