@@ -3,39 +3,9 @@ import rentok from "../assets/rentok.png";
 import rentok2 from "../assets/rentok.png";
 import rentok3 from "../assets/rentok.png";
 import { FaFacebookF, FaInstagram, FaTwitter } from "react-icons/fa";
+import banners from "../data/bannerData";
 
-const banners = [
-  {
-    title: "Welcome to RentOk",
-    heading: "Rent Smart, Save Big!",
-    description:
-      "Rent electronics, furniture, bikes, and more at the best prices — anytime, anywhere.",
-    buttonText: "Rent Now",
-    badge: "Up to 50% OFF",
-    image: rentok,
-    bg: "from-yellow-400 via-yellow-300 to-orange-300",
-  },
-  {
-    title: "Upgrade Your Lifestyle",
-    heading: "Flexible Rentals, Happy Wallet!",
-    description:
-      "From smart TVs to comfy sofas, RentOk has everything you need on your terms.",
-    buttonText: "Explore Deals",
-    badge: "No Security Deposit",
-    image: rentok2,
-    bg: "from-blue-400 via-blue-300 to-indigo-300",
-  },
-  {
-    title: "Fast & Easy Rentals",
-    heading: "One Click, Many Choices",
-    description:
-      "Discover top brands, quick deliveries, and affordable plans tailored for you.",
-    buttonText: "Start Renting",
-    badge: "Free Delivery",
-    image: rentok3,
-    bg: "from-green-400 via-green-300 to-emerald-300",
-  },
-];
+
 
 const RentokBanner = () => {
   const [index, setIndex] = useState(0);
@@ -52,7 +22,7 @@ const RentokBanner = () => {
   const current = banners[index];
 
   return (
-    <div className="w-full relative overflow-hidden py-2">
+    <div className="w-full relative bg-white overflow-hidden rounded-lg pb-1 my-2 ">
       <style>{`
         @keyframes slideInRight {
           from {
@@ -69,40 +39,12 @@ const RentokBanner = () => {
         }
       `}</style>
 
-      {/* Dropdown Menu */}
-      <div className="absolute top-4 right-6 z-10">
-        <div className="relative">
-          <button
-            onClick={() => setDropdownOpen(!dropdownOpen)}
-            className="bg-white text-black font-medium px-4 py-2 rounded shadow hover:bg-gray-100"
-          >
-            Menu
-          </button>
-          {dropdownOpen && (
-            <div className="absolut right-0 mt-2 bg-white rounded shadow-lg flex space-x-4 px-4 py-2 z-10">
-              <a href="#" className="text-sm text-gray-700 hover:text-black">
-                Electronics
-              </a>
-              <a href="#" className="text-sm text-gray-700 hover:text-black">
-                Furniture
-              </a>
-              <a href="#" className="text-sm text-gray-700 hover:text-black">
-                Bikes
-              </a>
-              <a href="#" className="text-sm text-gray-700 hover:text-black">
-                Deals
-              </a>
-            </div>
-          )}
-        </div>
-      </div>
-
       <section
         key={index}
         className={`relative bg-gradient-to-r ${current.bg} rounded-lg overflow-hidden  px-6 sm:px-10 md:px-12 lg:px-16 flex flex-col-reverse md:flex-row items-center justify-between gap-6 mb-1 animate-slide-in-right`}
       >
         {/* Left Text */}
-        <div className="w-full md:w-1/2 text-center md:text-left space-y-5">
+        <div className="w-full md:w-1/2 text-center md:text-left  space-y-5">
           <h2 className="text-lg sm:text-xl md:text-2xl text-black font-bold tracking-wider bg-white/70 px-4 py-1 inline-block rounded shadow-md hover:scale-105 transition duration-300">
             {current.title}
           </h2>

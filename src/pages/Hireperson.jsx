@@ -1,4 +1,69 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
+
+function CustomDropdown({ label, options, selectedValue, onChange }) {
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const dropdownRef = useRef(null);
+
+  const selectedOption = options.find((opt) => opt.value === selectedValue) || options[0];
+
+  const handleSelect = (option) => {
+    onChange(option.value);
+    setDropdownOpen(false);
+  };
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setDropdownOpen(false);
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  return (
+    <div className="relative w-full" ref={dropdownRef}>
+      <label className="block font-medium mb-1">{label}</label>
+      <button
+        type="button"
+        onClick={() => setDropdownOpen((prev) => !prev)}
+        className="w-full flex justify-between items-center bg-white border border-gray-300 text-gray-500 text-sm px-4 py-2 rounded outline-none shadow-sm hover:border-yellow-300"
+      >
+        <span>{selectedOption.label}</span>
+        <svg
+          className={`w-4 h-4 transition-transform ${dropdownOpen ? "rotate-180" : ""}`}
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+        </svg>
+      </button>
+
+      {dropdownOpen && (
+        <div className="absolute left-0 mt-1 w-full bg-white rounded shadow-lg z-50 border border-gray-200">
+          {options.map((option) => (
+            <button
+              key={option.value}
+              type="button"
+              onClick={() => handleSelect(option)}
+              className={`text-left w-full text-sm px-4 py-2 hover:bg-yellow-100 ${
+                selectedValue === option.value
+                  ? "text-black font-semibold bg-gray-50"
+                  : "text-gray-700"
+              }`}
+            >
+              {option.label}
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
 
 function Hireperson() {
   const [name, setName] = useState("");
@@ -9,18 +74,9 @@ function Hireperson() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    console.log({
-      name,
-      contact,
-      duration,
-      serviceType,
-      description,
-    });
-
+    console.log({ name, contact, duration, serviceType, description });
     alert("Hairperson service submitted!");
 
-    // Reset form
     setName("");
     setContact("");
     setDuration("");
@@ -28,115 +84,106 @@ function Hireperson() {
     setDescription("");
   };
 
+  const durationOptions = [
+    { value: "", label: "Choose duration" },
+    { value: "1 hour", label: "1 hour" },
+    { value: "1 day", label: "1 day" },
+    { value: "1 week", label: "1 week" },
+    { value: "1 month", label: "1 month" },
+  ];
+
+  const serviceOptions = [
+    { value: "", label: "Select a service" },
+    { value: "Haircut", label: "Haircut" },
+    { value: "Shave", label: "Shave" },
+    { value: "Beard Styling", label: "Beard Styling" },
+    { value: "Other", label: "Other" },
+  ];
+
   return (
-    <div className="max-w-2xl mx-auto px-4 py-12">
-      <h2 className="text-3xl font-extrabold text-center mb-6 text-yellow-600 tracking-wide">
-        Book Your Hairperson Service
-      </h2>
-
-      <form
-        onSubmit={handleSubmit}
-        className="bg-gradient-to-br from-yellow-100 via-orange-50 to-white shadow-lg rounded-xl p-8 space-y-6"
-      >
-        {/* Name */}
-        <div>
-          <label htmlFor="name" className="block text-sm font-semibold text-gray-800 mb-1">
-            Name
-          </label>
-          <input
-            type="text"
-            id="name"
-            value={name}
-            required
-            placeholder="Enter your name"
-            onChange={(e) => setName(e.target.value)}
-            className="w-full border border-yellow-300 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-yellow-400"
-          />
+    <div className="w-full h-auto min-h-screen flex items-center justify-center bg-gray-100">
+      <div className="w-full max-w-[900px] mx-auto mt-8 px-4 md:px-8 py-6 bg-white border border-gray-300 rounded-2xl shadow-sm">
+        <div className="flex justify-center mb-6">
+          <h2 className="text-2xl md:text-3xl font-bold text-black text-center">
+            Book Your Hairperson Service
+          </h2>
         </div>
 
-        {/* Contact */}
-        <div>
-          <label htmlFor="contact" className="block text-sm font-semibold text-gray-800 mb-1">
-            Contact Number
-          </label>
-          <input
-            type="tel"
-            id="contact"
-            value={contact}
-            required
-            pattern="[0-9]{10}"
-            placeholder="Enter contact number"
-            onChange={(e) => setContact(e.target.value)}
-            className="w-full border border-yellow-300 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-yellow-400"
-          />
-        </div>
+        <form
+          onSubmit={handleSubmit}
+          className="grid grid-cols-1 md:grid-cols-2 gap-6 text-black"
+        >
+          {/* Name */}
+          <div>
+            <label className="block font-medium mb-1">Name</label>
+            <input
+              type="text"
+              value={name}
+              required
+              placeholder="Enter your name"
+              onChange={(e) => setName(e.target.value)}
+              className="w-full p-2 border border-gray-300 rounded outline-none hover:border-yellow-300"
+            />
+          </div>
 
-        {/* Duration */}
-        <div>
-          <label htmlFor="duration" className="block text-sm font-semibold text-gray-800 mb-1">
-            Select Duration
-          </label>
-          <select
-            id="duration"
-            value={duration}
-            required
-            onChange={(e) => setDuration(e.target.value)}
-            className="w-full border border-yellow-300 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-yellow-400"
-          >
-            <option value="">Choose duration</option>
-            <option value="1 hour">1 hour</option>
-            <option value="1 day">1 day</option>
-            <option value="1 week">1 week</option>
-            <option value="1 month">1 month</option>
-          </select>
-        </div>
+          {/* Contact */}
+          <div>
+            <label className="block font-medium mb-1">Contact Number</label>
+            <input
+              type="tel"
+              value={contact}
+              required
+              pattern="[0-9]{10}"
+              placeholder="Enter contact number"
+              onChange={(e) => setContact(e.target.value)}
+              className="w-full p-2 border border-gray-300 rounded outline-none hover:border-yellow-300"
+            />
+          </div>
 
-        {/* Service Type */}
-        <div>
-          <label htmlFor="serviceType" className="block text-sm font-semibold text-gray-800 mb-1">
-            Service Type
-          </label>
-          <select
-            id="serviceType"
-            value={serviceType}
-            required
-            onChange={(e) => setServiceType(e.target.value)}
-            className="w-full border border-yellow-300 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-yellow-400"
-          >
-            <option value="">Select a service</option>
-            <option value="Haircut">Haircut</option>
-            <option value="Shave">Shave</option>
-            <option value="Beard Styling">Beard Styling</option>
-            <option value="Other">Other</option>
-          </select>
-        </div>
+          {/* Custom Duration Dropdown */}
+          <div>
+            <CustomDropdown
+              label="Select Duration"
+              options={durationOptions}
+              selectedValue={duration}
+              onChange={setDuration}
+            />
+          </div>
 
-        {/* Description */}
-        <div>
-          <label htmlFor="description" className="block text-sm font-semibold text-gray-800 mb-1">
-            Service Description
-          </label>
-          <textarea
-            id="description"
-            value={description}
-            required
-            onChange={(e) => setDescription(e.target.value)}
-            rows="4"
-            placeholder="Describe the service you want..."
-            className="w-full border border-yellow-300 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-yellow-400"
-          />
-        </div>
+          {/* Custom Service Type Dropdown */}
+          <div>
+            <CustomDropdown
+              label="Service Type"
+              options={serviceOptions}
+              selectedValue={serviceType}
+              onChange={setServiceType}
+            />
+          </div>
 
-        {/* Submit Button */}
-        <div className="text-center">
-          <button
-            type="submit"
-            className="bg-black text-white font-semibold px-6 py-2 rounded-full hover:bg-gray-800 transition duration-200"
-          >
-            Submit Request
-          </button>
-        </div>
-      </form>
+          {/* Description */}
+          <div className="md:col-span-2">
+            <label className="block font-medium mb-1">Service Description</label>
+            <textarea
+              value={description}
+              required
+              onChange={(e) => setDescription(e.target.value)}
+              rows="4"
+              placeholder="Describe the service you want..."
+              className="w-full p-2 border border-gray-300 rounded outline-none resize-none hover:border-yellow-300"
+            ></textarea>
+          </div>
+
+          {/* Submit */}
+          <div className="md:col-span-2">
+            <button
+              type="submit"
+              className="w-full md:w-auto bg-yellow-400 hover:bg-yellow-500 text-black font-semibold py-2 px-6 rounded shadow-sm"
+            >
+              Submit Request
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 }

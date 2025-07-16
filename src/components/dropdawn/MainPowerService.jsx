@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const options = [
   { value: "", label: "Select a main-power service" },
@@ -9,11 +10,15 @@ function MainPowerService({ onChange }) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [selected, setSelected] = useState(options[0]);
   const dropdownRef = useRef(null);
+  const navigate = useNavigate();
 
   const handleSelect = (option) => {
     setSelected(option);
     setDropdownOpen(false);
     onChange?.("mainPowerService", option.value);
+    if (option.value === "Hireperson")
+      // Navigate to the hire person page if selected
+    navigate('/hireperson');
   };
 
   // Close dropdown on outside click
@@ -38,7 +43,7 @@ function MainPowerService({ onChange }) {
       <button
         type="button"
         onClick={() => setDropdownOpen((prev) => !prev)}
-        className="w-full flex justify-between items-center bg-white border border-gray-300 text-gray-500 text-sm font- px-4 py-1 rounded shadow-sm hover:bg-gray-100"
+        className="w-full flex justify-between items-center bg-white border border-gray-300 text-gray-500 text-sm  px-4 py-1 rounded shadow-sm hover:border-yellow-300"
       >
         <span>{selected.label}</span>
         {/* Dropdown arrow icon */}

@@ -11,20 +11,20 @@ const Footer = () => {
           {/* Popular Locations */}
           <div>
             <h4 className="text-sm font-semibold mb-4 uppercase text-gray-800">Popular Locations</h4>
-            <ul className="space-y-2 text-sm text-gray-600">
-              <li className="flex items-center space-x-2">
+            <ul className="space-y-2 text-sm text-gray-600 ">
+              <li className="flex items-center space-x-2 hover:text-yellow-400">
                 <FaMapMarkerAlt className="text-red-500" />
                 <span>Kolkata</span>
               </li>
-              <li className="flex items-center space-x-2">
+              <li className="flex items-center space-x-2 hover:text-yellow-400">
                 <FaMapMarkerAlt className="text-red-500" />
                 <span>Mumbai</span>
               </li>
-              <li className="flex items-center space-x-2">
+              <li className="flex items-center space-x-2 hover:text-yellow-400">
                 <FaMapMarkerAlt className="text-red-500" />
                 <span>Chennai</span>
               </li>
-              <li className="flex items-center space-x-2">
+              <li className="flex items-center space-x-2 hover:text-yellow-400">
                 <FaMapMarkerAlt className="text-red-500" />
                 <span>Pune</span>
               </li>
@@ -35,10 +35,10 @@ const Footer = () => {
           <div>
             <h4 className="text-sm font-semibold mb-4 uppercase text-gray-800">About Rentok</h4>
             <ul className="space-y-2 text-sm text-gray-600">
-              <li className="flex items-center space-x-2 hover:text-indigo-500"><FaInfoCircle /><span>About Rentok</span></li>
-              <li className="flex items-center space-x-2 hover:text-indigo-500"><FaNewspaper /><span>Careers</span></li>
-              <li className="flex items-center space-x-2 hover:text-indigo-500"><FaPhoneAlt /><span>Contact Us</span></li>
-              <li className="flex items-center space-x-2 hover:text-indigo-500"><FaNewspaper /><span>Media Center</span></li>
+              <li className="flex items-center space-x-2 hover:text-yellow-400"><FaInfoCircle className="text-gray-600" /><span>About Rentok</span></li>
+              <li className="flex items-center space-x-2 hover:text-yellow-400"><FaNewspaper className="text-gray-600"/><span>Careers</span></li>
+              <li className="flex items-center space-x-2 hover:text-yellow-400"><FaPhoneAlt className="text-gray-600"/><span>Contact Us</span></li>
+              <li className="flex items-center space-x-2 hover:text-yellow-400"><FaNewspaper className="text-gray-600"/><span>Media Center</span></li>
             </ul>
           </div>
 
@@ -46,10 +46,10 @@ const Footer = () => {
           <div>
             <h4 className="text-sm font-semibold mb-4 uppercase text-gray-800">Rentok Services</h4>
             <ul className="space-y-2 text-sm text-gray-600">
-              <li className="flex items-center space-x-2 hover:text-green-600"><FaHandsHelping  /><span>Help</span></li>
-              <li className="flex items-center space-x-2 hover:text-green-600"><FaShieldAlt  /><span>Safety Guidelines</span></li>
-              <li className="flex items-center space-x-2 hover:text-green-600"><FaSitemap /><span>Sitemap</span></li>
-              <li className="flex items-center  space-x-2 hover:text-green-600"><FaFileContract className="" /><span>Terms & Conditions</span></li>
+              <li className="flex items-center space-x-2 hover:text-yellow-400"><FaHandsHelping  className="text-gray-600"/><span>Help</span></li>
+              <li className="flex items-center space-x-2 hover:text-yellow-400"><FaShieldAlt  className="text-gray-600"/><span>Safety Guidelines</span></li>
+              <li className="flex items-center space-x-2 hover:text-yellow-400"><FaSitemap className="text-gray-600"/><span>Sitemap</span></li>
+              <li className="flex items-center  space-x-2 hover:text-yellow-400"><FaFileContract className="text-gray-600"/><span>Terms & Conditions</span></li>
             </ul>
           </div>
 
