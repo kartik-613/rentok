@@ -4,10 +4,11 @@ import Home from "../pages/Home";
 import Hireperson from "../pages/Hireperson";
 import Products from "../pages/Products";
 import Login from "../pages/Login";
-import Register from "../pages/Register";
+// import Register from "../pages/Register";
 import Sell from "../pages/Sell";
 import Header from "../components/header/Header";
 import Footer from "../components/Footer";
+import RegisterPage from "../pages/register/Register";
 
 
 const MainRoute = () => {
@@ -20,7 +21,7 @@ const MainRoute = () => {
           <Route path="/hireperson" element={<Hireperson />} />
           <Route path="/products/:category" element={<Products />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
+          <Route path="/register" element={<RegisterPage />} />
           <Route path="/sell" element={<Sell />} />
         </Routes>
           <Footer />

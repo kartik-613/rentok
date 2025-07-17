@@ -1,191 +1,155 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState } from "react";
+import { FiSearch } from "react-icons/fi";
+import services from "../data/services";
 
-function CustomDropdown({ label, options, selectedValue, onChange }) {
-  const [dropdownOpen, setDropdownOpen] = useState(false);
-  const dropdownRef = useRef(null);
+// --- Reusable UI Components ---
+const Card = ({ children, className = "", ...props }) => (
+  <div
+    className={`rounded-2xl border bg-white shadow-sm hover:shadow-md transition cursor-pointer ${className}`}
+    {...props}
+  >
+    {children}
+  </div>
+);
 
-  const selectedOption = options.find((opt) => opt.value === selectedValue) || options[0];
+const CardContent = ({ children, className = "", ...props }) => (
+  <div className={`p-5 ${className}`} {...props}>
+    {children}
+  </div>
+);
 
-  const handleSelect = (option) => {
-    onChange(option.value);
-    setDropdownOpen(false);
-  };
+const Button = ({ children, className = "", ...props }) => (
+  <button
+    className={`px-4 py-2 rounded-xl transition font-medium ${className}`}
+    {...props}
+  >
+    {children}
+  </button>
+);
 
-  useEffect(() => {
-    function handleClickOutside(event) {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setDropdownOpen(false);
-      }
-    }
+const Input = ({ className = "", icon: Icon, ...props }) => (
+  <div className={`relative w-full ${className}`}>
+    {Icon && (
+      <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500">
+        <Icon size={18} />
+      </span>
+    )}
+    <input
+      className="w-full pl-10 pr-4 py-2 border rounded-lg text-sm bg-white focus:outline-none focus:ring-2 focus:ring-yellow-400"
+      {...props}
+    />
+  </div>
+);
 
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
+// --- Main Component ---
+const HirePerson = () => {
+  const [search, setSearch] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("All");
+  const [selectedService, setSelectedService] = useState(null);
 
-  return (
-    <div className="relative w-full" ref={dropdownRef}>
-      <label className="block font-medium mb-1">{label}</label>
-      <button
-        type="button"
-        onClick={() => setDropdownOpen((prev) => !prev)}
-        className="w-full flex justify-between items-center bg-white border border-gray-300 text-gray-500 text-sm px-4 py-2 rounded outline-none shadow-sm hover:border-yellow-300"
-      >
-        <span>{selectedOption.label}</span>
-        <svg
-          className={`w-4 h-4 transition-transform ${dropdownOpen ? "rotate-180" : ""}`}
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
-        </svg>
-      </button>
-
-      {dropdownOpen && (
-        <div className="absolute left-0 mt-1 w-full bg-white rounded shadow-lg z-50 border border-gray-200">
-          {options.map((option) => (
-            <button
-              key={option.value}
-              type="button"
-              onClick={() => handleSelect(option)}
-              className={`text-left w-full text-sm px-4 py-2 hover:bg-yellow-100 ${
-                selectedValue === option.value
-                  ? "text-black font-semibold bg-gray-50"
-                  : "text-gray-700"
-              }`}
-            >
-              {option.label}
-            </button>
-          ))}
-        </div>
-      )}
-    </div>
+  const allServices = services.flatMap((group) =>
+    group.items.map((service) => ({
+      name: service,
+      category: group.category,
+    }))
   );
-}
 
-function Hireperson() {
-  const [name, setName] = useState("");
-  const [duration, setDuration] = useState("");
-  const [serviceType, setServiceType] = useState("");
-  const [description, setDescription] = useState("");
-  const [contact, setContact] = useState("");
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log({ name, contact, duration, serviceType, description });
-    alert("Hairperson service submitted!");
-
-    setName("");
-    setContact("");
-    setDuration("");
-    setServiceType("");
-    setDescription("");
-  };
-
-  const durationOptions = [
-    { value: "", label: "Choose duration" },
-    { value: "1 hour", label: "1 hour" },
-    { value: "1 day", label: "1 day" },
-    { value: "1 week", label: "1 week" },
-    { value: "1 month", label: "1 month" },
-  ];
-
-  const serviceOptions = [
-    { value: "", label: "Select a service" },
-    { value: "Haircut", label: "Haircut" },
-    { value: "Shave", label: "Shave" },
-    { value: "Beard Styling", label: "Beard Styling" },
-    { value: "Other", label: "Other" },
-  ];
+  const filteredServices = allServices.filter(
+    (service) =>
+      (selectedCategory === "All" || service.category === selectedCategory) &&
+      service.name.toLowerCase().includes(search.toLowerCase())
+  );
 
   return (
-    <div className="w-full h-auto min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="w-full max-w-[900px] mx-auto mt-8 px-4 md:px-8 py-6 bg-white border border-gray-300 rounded-2xl shadow-sm">
-        <div className="flex justify-center mb-6">
-          <h2 className="text-2xl md:text-3xl font-bold text-black text-center">
-            Book Your Hairperson Service
-          </h2>
+    <div className="w-full px-4 mx-auto pt-22 pb-16 bg-gray-100">
+      <div className="bg-white rounded-lg px-4 md:px-8 lg:px-12 xl:px-20 max-w-screen-2xl mx-auto">
+        <div>
+          <h1 className="text-3xl sm:text-4xl font-bold py-6 text-center">
+            Hire a Trusted Service
+          </h1>
         </div>
 
-        <form
-          onSubmit={handleSubmit}
-          className="grid grid-cols-1 md:grid-cols-2 gap-6 text-black"
-        >
-          {/* Name */}
-          <div>
-            <label className="block font-medium mb-1">Name</label>
-            <input
-              type="text"
-              value={name}
-              required
-              placeholder="Enter your name"
-              onChange={(e) => setName(e.target.value)}
-              className="w-full p-2 border border-gray-300 rounded outline-none hover:border-yellow-300"
+        <div className="flex flex-col lg:flex-row gap-6">
+          {/* Sidebar */}
+          <aside className="w-full lg:w-1/4 bg-white rounded-2xl border p-5 shadow-md sticky top-6 h-fit">
+            <h2 className="text-xl font-semibold mb-4">Search & Filter</h2>
+
+            <Input
+              placeholder="Search services..."
+              icon={FiSearch}
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              className="mb-5"
             />
-          </div>
 
-          {/* Contact */}
-          <div>
-            <label className="block font-medium mb-1">Contact Number</label>
-            <input
-              type="tel"
-              value={contact}
-              required
-              pattern="[0-9]{10}"
-              placeholder="Enter contact number"
-              onChange={(e) => setContact(e.target.value)}
-              className="w-full p-2 border border-gray-300 rounded outline-none hover:border-yellow-300"
-            />
-          </div>
+            <h3 className="text-sm font-medium text-gray-700 mb-3">
+              Categories
+            </h3>
+            <div className="flex flex-wrap lg:flex-col gap-2">
+              {["All", ...services.map((s) => s.category)].map((cat) => (
+                <Button
+                  key={cat}
+                  onClick={() => setSelectedCategory(cat)}
+                  className={`text-left text-sm border w-full ${
+                    selectedCategory === cat
+                      ? "bg-yellow-100 border-yellow-300 text-black font-semibold"
+                      : "bg-gray-50 border-gray-200 text-gray-700 hover:bg-yellow-50"
+                  }`}
+                >
+                  {cat}
+                </Button>
+              ))}
+            </div>
+          </aside>
 
-          {/* Custom Duration Dropdown */}
-          <div>
-            <CustomDropdown
-              label="Select Duration"
-              options={durationOptions}
-              selectedValue={duration}
-              onChange={setDuration}
-            />
-          </div>
-
-          {/* Custom Service Type Dropdown */}
-          <div>
-            <CustomDropdown
-              label="Service Type"
-              options={serviceOptions}
-              selectedValue={serviceType}
-              onChange={setServiceType}
-            />
-          </div>
-
-          {/* Description */}
-          <div className="md:col-span-2">
-            <label className="block font-medium mb-1">Service Description</label>
-            <textarea
-              value={description}
-              required
-              onChange={(e) => setDescription(e.target.value)}
-              rows="4"
-              placeholder="Describe the service you want..."
-              className="w-full p-2 border border-gray-300 rounded outline-none resize-none hover:border-yellow-300"
-            ></textarea>
-          </div>
-
-          {/* Submit */}
-          <div className="md:col-span-2">
-            <button
-              type="submit"
-              className="w-full md:w-auto bg-yellow-400 hover:bg-yellow-500 text-black font-semibold py-2 px-6 rounded shadow-sm"
-            >
-              Submit Request
-            </button>
-          </div>
-        </form>
+          {/* Main Content */}
+          <section className="flex-1">
+            {selectedService ? (
+              <div className="bg-white p-6 rounded-2xl border shadow-md">
+                <h2 className="text-2xl font-semibold mb-2">
+                  {selectedService.name}
+                </h2>
+                <p className="text-gray-600 mb-4">
+                  Category: {selectedService.category}
+                </p>
+                <p className="text-gray-500 italic">
+                  More details coming soon...
+                </p>
+                <Button
+                  onClick={() => setSelectedService(null)}
+                  className="mt-4 bg-gray-100 hover:bg-gray-200 text-sm"
+                >
+                  ← Back to services
+                </Button>
+              </div>
+            ) : filteredServices.length === 0 ? (
+              <div className="text-center text-gray-500 mt-12">
+                No services match your search.
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6">
+                {filteredServices.map((service, index) => (
+                  <Card
+                    key={index}
+                    onClick={() => setSelectedService(service)}
+                  >
+                    <CardContent>
+                      <h3 className="text-lg font-semibold mb-1">
+                        {service.name}
+                      </h3>
+                      <p className="text-sm text-gray-500">
+                        {service.category}
+                      </p>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            )}
+          </section>
+        </div>
       </div>
     </div>
   );
-}
+};
 
-export default Hireperson;
+export default HirePerson;

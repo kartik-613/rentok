@@ -23,7 +23,7 @@ export default function Sell() {
 
   return (
     <div className="w-full h-screen flex items-center justify-center bg-gray-100">
-      <div className="w-full max-w-[900px] h-auto md:h-[630px] mx-auto mt-2 px-4 md:px-8 py-6 bg-white border border-gray-300 rounded-2xl shadow-sm overflow-y-auto">
+      <div className="w-full max-w-[900px] h-auto md:h-[630px] mx-auto mt-40 px-4 md:px-8 py-6 bg-white border border-gray-300 rounded-2xl shadow-sm overflow-y-auto">
         <div className="flex justify-center mb-6">
           <h2 className="text-2xl md:text-3xl font-bold text-black text-center">
             Post Your Ad
@@ -129,3 +129,5 @@ export default function Sell() {
     </div>
   );
 }
+
+

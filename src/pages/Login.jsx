@@ -18,13 +18,13 @@ export default function Login() {
   };
 
   return (
-    <div className="w-full h-screen flex items-center justify-center bg-gray-100">
-      <div className="w-full max-w-md px-6 py-8 bg-white border border-gray-300 rounded-2xl shadow-md">
+    <div className="w-full h-screen flex items-start justify-center bg-gray-100">
+      <div className="w-full max-w-md px-6 py-8 mt-30 bg-white border border-gray-300 rounded-2xl shadow-md">
         <h2 className="text-2xl md:text-3xl font-bold text-center text-black mb-6">
           Login
         </h2>
 
-        <form onSubmit={handleSubmit} className="space-y-5 text-black">
+        <form onSubmit={handleSubmit} className="space-y-5 text-black border-t-1 border-gray-300 pt-6">
           <div>
             <label className="block font-medium mb-1">Email</label>
             <input
@@ -33,7 +33,7 @@ export default function Login() {
               placeholder="Enter your email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full p-2 border border-gray-300 rounded outline-none hover:border-yellow-300"
+              className="w-full p-2 border border-gray-300 rounded outline-none hover:border-yellow-300 shadow-sm"
             />
           </div>
 
@@ -46,7 +46,7 @@ export default function Login() {
                 placeholder="Enter your password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full p-2 border border-gray-300 rounded outline-none hover:border-yellow-300"
+                className="w-full p-2 border border-gray-300 rounded outline-none hover:border-yellow-300 shadow-sm"
               />
               <button
                 type="button"
