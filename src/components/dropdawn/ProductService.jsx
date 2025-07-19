@@ -42,7 +42,7 @@ function ProductService({ onChange }) {
       <button
         type="button"
         onClick={() => setDropdownOpen((prev) => !prev)}
-        className="w-full flex justify-between items-center bg-white border border-gray-300 text-gray-500 text-sm px-4 py-1 rounded shadow-sm hover:border-yellow-300"
+        className="w-full flex justify-between items-center bg-white border border-gray-300 text-gray-500 text-sm px-4 py-2 rounded shadow-sm hover:border-yellow-300"
       >
         <span>{selected.label}</span>
         <svg

@@ -1,0 +1,66 @@
+// src/data/dummyUsers.js
+
+const dummyUsers = [
+  {
+    id: 1,
+    userType: "Worker",
+    name: "Raj Verma",
+    serviceType: "Electrician",
+    mobile: "9876543210",
+    email: "raj@example.com",
+    address: "123 Main Street, Delhi",
+    aadharImageUrl: "https://via.placeholder.com/150",
+  },
+  {
+    id: 2,
+    userType: "Customer",
+    name: "Priya Sharma",
+    serviceType: "Plumbing",
+    mobile: "9123456789",
+    email: "priya@example.com",
+    address: "456 Market Road, Mumbai",
+    aadharImageUrl: "https://via.placeholder.com/150",
+  },
+  {
+    id: 3,
+    userType: "Worker",
+    name: "Amit Singh",
+    serviceType: "Carpenter",
+    mobile: "7890123456",
+    email: "amit@fixit.com",
+    address: "89 Woodlane, Lucknow",
+    aadharImageUrl: "https://via.placeholder.com/150",
+  },
+  {
+    id: 4,
+    userType: "Customer",
+    name: "Neha Gupta",
+    serviceType: "Cleaning",
+    mobile: "9090909090",
+    email: "neha@gmail.com",
+    address: "32 Rose Villa, Jaipur",
+    aadharImageUrl: "https://via.placeholder.com/150",
+  },
+  {
+    id: 5,
+    userType: "Worker",
+    name: "Vikas Yadav",
+    serviceType: "Painter",
+    mobile: "9988776655",
+    email: "vikas@paintpro.com",
+    address: "Block 12, Sector 22, Noida",
+    aadharImageUrl: "https://via.placeholder.com/150",
+  },
+  {
+    id: 6,
+    userType: "Customer",
+    name: "Anjali Mehta",
+    serviceType: "Gardening",
+    mobile: "8000001111",
+    email: "anjali@green.in",
+    address: "Garden View Apartments, Pune",
+    aadharImageUrl: "https://via.placeholder.com/150",
+  },
+];
+
+export default dummyUsers;
