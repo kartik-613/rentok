@@ -6,7 +6,7 @@ import Dropdawn from "../components/dropdawn/Dropdawn";
 const Home = () => {
   return (
     <div>
-      <div className="md:pt-22 pt-18 px-4 bg-gray-100 ">
+      <div className="md:pt-22 pt-18 px-2 bg-gray-100 ">
         <Dropdawn />
         <Banner />
         <CardSection />

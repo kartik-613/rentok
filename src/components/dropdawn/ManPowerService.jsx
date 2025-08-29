@@ -6,7 +6,7 @@ const options = [
   { value: "Hireperson", label: "Hire person" },
 ];
 
-function MainPowerService({ onChange }) {
+function ManPowerService({ onChange }) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [selected, setSelected] = useState(options[0]);
   const dropdownRef = useRef(null);
@@ -38,7 +38,7 @@ function MainPowerService({ onChange }) {
   return (
     <div ref={dropdownRef} className="relative w-full max-w-xs sm:w-48 md:w-60">
       <label className="block text-sm font-medium text-gray-700 ml-1 mb-1">
-        Main Power Service
+        Man Power Service
       </label>
       <button
         type="button"
@@ -87,4 +87,4 @@ function MainPowerService({ onChange }) {
   );
 }
 
-export default MainPowerService;
+export default ManPowerService;
