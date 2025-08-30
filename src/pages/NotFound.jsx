@@ -1,10 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { CardContent, Button } from "../pages/Hireperson/BookingFormModal"; // reuse shared components
+import Card from "../components/Card";
+import CardContent from "../components/CardContent";
+import Button from "../components/Button";  
+
 
 const NotFound = () => {
   return (
-    <div className="flex items-center justify-center min-h-screen  relative bg-gradient-to-r from-yellow-200 via-yellow-300 to-orange-300 px-4">
+    <div className="flex items-center justify-center min-h-screen  relative bg-white px-4">
       <CardContent className="flex flex-col items-center text-center space-y-6 max-w-2xl w-full">
         {/* 404 Heading */}
         <h1 className="text-5xl sm:text-6xl lg:text-8xl font-bold text-red-500">
@@ -23,7 +26,7 @@ const NotFound = () => {
 
         {/* Button */}
         <Link to="/" className="w-full sm:w-auto">
-          <Button className="w-full sm:w-auto px-6 py-3 bg-black text-white transition">
+          <Button className="w-full sm:w-auto px-6 py-3 bg-yellow-400 text-white transition">
             Go Back Home
           </Button>
         </Link>

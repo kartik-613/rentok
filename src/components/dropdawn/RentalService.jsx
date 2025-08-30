@@ -1,4 +1,5 @@
   import React, { useState, useRef, useEffect } from "react";
+  import { useNavigate } from "react-router-dom";
 
   const options = [
     { value: "", label: "Select a rental service" },
@@ -13,11 +14,15 @@
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const [selected, setSelected] = useState(options[0]);
     const dropdownRef = useRef(null);
+    const navigate = useNavigate();
 
     const handleSelect = (option) => {
       setSelected(option);
       setDropdownOpen(false);
       onChange?.("rentalService", option.value);
+          if (option.value === "Hotel") {
+      navigate("/hotels");
+    }
     };
 
     useEffect(() => {

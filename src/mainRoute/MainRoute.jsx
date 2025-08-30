@@ -55,6 +55,9 @@ const ApprovalDashboard = lazy(() => import("../pages/Hireperson/ApprovalDashboa
 const EmployeeInfo = lazy(() => import("../pages/Hireperson/EmployeeInfo"));
 const BookingFormModal = lazy(() => import("../pages/Hireperson/BookingFormModal"));
 const NotFound = lazy(() => import("../pages/NotFound"));
+const LinkPage = lazy(() => import("../pages/LinkPage"));
+// const Hotels = lazy(() => import("../pages/Hotels"));
+// const HotelDetail = lazy(() => import("../pages/HotelDetail"));
 
 const appRoutes = [
   { path: "/", element: <Home /> },
@@ -66,6 +69,9 @@ const appRoutes = [
   { path: "/approval", element: <ApprovalDashboard /> },
   { path: "/employee/:id", element: <EmployeeInfo /> },
   { path: "/booking/:id", element: <BookingFormModal /> },
+  { path: "/linkpage", element: <LinkPage /> },
+  // { path: "/hotels", element: <Hotels /> },
+  // { path: "//hotels/:id", element: <HotelDetail /> },
 ];
 
 const MainRoute = () => {
